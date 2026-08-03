@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Member } from '../member';
 import { FormsModule } from '@angular/forms';
-import { MEMBERS } from '../mock-members';
 import { MemberDetail } from '../member-detail/member-detail';
+import { MemberService } from '../services/member-service';
 
 @Component({
   selector: 'app-members',
@@ -11,15 +11,10 @@ import { MemberDetail } from '../member-detail/member-detail';
   styleUrl: './members.css',
 })
 export class Members {
+  private memberService = inject(MemberService);
 
-  members = MEMBERS;
-  member: Member = {
-    id: 1,
-    name: '田中太郎',
-  };
+  members: Member[] = this.memberService.getMembers();
   selectedMember?: Member;
-
-  constructor() { }
 
   onSelect(member: Member): void {
     this.selectedMember = member;
