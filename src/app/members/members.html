@@ -1,10 +1,10 @@
 <h2>社員一覧</h2>
 <ul class="members">
     @for (member of members; track member) {
-        <li [class.selected]="member === selectedMember" (click)="onSelect(member)">
-            <span class="badge">{{ member.id }}</span>{{ member.name }}
+        <li>
+            <a routerLink="/detail/{{ member.id }}">
+                <span class="badge">{{ member.id }}</span>{{ member.name }}
+            </a>
         </li>
     }
 </ul>
-
-<app-member-detail [member]="selectedMember"></app-member-detail>
