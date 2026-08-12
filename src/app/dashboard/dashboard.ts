@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Member } from '../member';
 import { MemberService } from '../services/member-service';
 import { RouterLink } from '@angular/router';
@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  members: Member[] = [];
+  members = signal<Member[]>([]);
 
   private memberService = inject(MemberService);
 
@@ -20,6 +20,8 @@ export class Dashboard {
 
   getMembers(): void {
     this.memberService.getMembers()
-      .subscribe(members => this.members = members.slice(0, 4));
+      .subscribe(members => {
+        this.members.set(members.slice(0, 4))
+    });
   }
 }

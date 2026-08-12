@@ -2,7 +2,7 @@
     <div>
         <h2>メッセージログ</h2>
         <button class="clear" (click)="messageService.clear()">クリア</button>
-        @for (message of messageService.messages(); track message) {
+        @for (message of messageService.messages(); track $index) {
             <div>{{ message }}</div>
         }
     </div>

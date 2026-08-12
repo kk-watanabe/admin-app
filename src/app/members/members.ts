@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Member } from '../member';
 import { FormsModule } from '@angular/forms';
 import { MemberDetail } from '../member-detail/member-detail';
@@ -15,14 +15,21 @@ import { RouterLink } from "@angular/router";
 export class Members {
   private memberService = inject(MemberService);
 
-  members: Member[] = [];
+  members = signal<Member[]>([]);
 
   ngOnInit(): void {
     this.getMembers();
   }
 
   getMembers(): void {
-    this.memberService.getMembers()
-      .subscribe(members => this.members = members);
+    this.memberService.getMembers().subscribe({
+      next: (members) => {
+        console.log('取得データ:', members); // ← ログを追加
+        this.members.set(members);
+      },
+      error: (err) => {
+        console.error('通信エラー:', err); // ← エラーログを追加
+      }
+    });
   }
 }
