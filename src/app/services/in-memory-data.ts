@@ -7,6 +7,7 @@ import { Member } from '../member';
 })
 export class InMemoryData implements InMemoryDbService {
     createDb() {
+        console.log('★createDbが呼ばれました');
         const members: Member[] = [
             { id: 11, name: '武山 岳大' },
             { id: 12, name: '駒倉 光紀' },
