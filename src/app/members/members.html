@@ -1,10 +1,17 @@
 <h2>社員一覧</h2>
+<div>
+    <label>社員名:
+        <input #memberName type="text" placeholder="社員名を入力">
+    </label>
+    <button (click)="add(memberName.value); memberName.value=''">追加</button>
+</div>
 <ul class="members">
     @for (member of members(); track member.id) {
         <li>
             <a routerLink="/detail/{{ member.id }}">
                 <span class="badge">{{ member.id }}</span>{{ member.name }}
             </a>
+            <button class="delete" (click)="delete(member)">x</button>
         </li>
     }
 </ul>

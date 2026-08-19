@@ -32,4 +32,19 @@ export class Members {
       }
     });
   }
+
+  add(name:string): void {
+      name = name.trim();
+      if (!name) {
+          return;
+      }
+      this.memberService.addMember(name).subscribe(member => {
+          this.members.update(members => [...members, member]);
+      });
+  }
+
+  delete(member: Member): void {
+      this.members.update(members => members.filter(m => m.id !== member.id));
+      this.memberService.deleteMember(member.id).subscribe();
+  }
 }

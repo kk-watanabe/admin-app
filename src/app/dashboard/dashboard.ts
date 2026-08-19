@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { Member } from '../member';
 import { MemberService } from '../services/member-service';
 import { RouterLink } from '@angular/router';
+import { MemberSearch } from '../member-search/member-search';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink],
+  imports: [RouterLink, MemberSearch],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
